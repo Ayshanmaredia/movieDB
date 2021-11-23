@@ -17,3 +17,13 @@ code {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.coverImage {
+  height: 510px;
+}
+
+.movieName {
+  font-size: 22px;
+  font-weight: 500;
+  color: black;
+}

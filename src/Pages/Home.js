@@ -15,7 +15,6 @@ const Home = () => {
     fetch(popular_url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.results);
         setMovies(data.results);
       });
   }, []);
