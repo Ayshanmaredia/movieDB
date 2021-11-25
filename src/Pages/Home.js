@@ -28,7 +28,7 @@ const Home = () => {
               <Col md={3}>
                 <Movie key={movie.id} {...movie} />
               </Col>
-            ))}
+            ) )}
         </Row>
       </Container>
     </div>

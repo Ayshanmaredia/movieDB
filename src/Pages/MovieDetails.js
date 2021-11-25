@@ -4,7 +4,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 
 const MovieDetails = () => {
 
-  const img_api = "https://image.tmdb.org/t/p/w500";
+  const img_url = "https://image.tmdb.org/t/p/w500";
 
   const [selectedMovie, setSelectedMovies] = useState();
   const [selectedTrailer, setSelectedTrailer] = useState([]);
@@ -36,7 +36,7 @@ const MovieDetails = () => {
         // console.log(stats.results);
       })
   }
-  
+       
   return (
     <>
       {
@@ -44,7 +44,7 @@ const MovieDetails = () => {
           <Container>
             <Row>
               <Col md={4}>
-                <Image className="coverImage" src={img_api + selectedMovie.poster_path} />
+                <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
               </Col>
               <Col md={8}>
                 <p className="movieName">Movie: {selectedMovie.title}</p>
