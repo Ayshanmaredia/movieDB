@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Button} from "react-bootstrap";
+import Trailer from "../components/Trailer";
 
 const MovieDetails = () => {
 
@@ -8,13 +9,14 @@ const MovieDetails = () => {
 
   const [selectedMovie, setSelectedMovies] = useState();
   const [selectedTrailer, setSelectedTrailer] = useState([]);
+  const [modalShow, setModalShow] = useState();
 
   const search = useLocation().search;
 
   useEffect(() => {
     const id = new URLSearchParams(search).get('id');
-    loadtMovieData(id);
-    loadMovieTrailer(id);
+    loadtMovieData(id)
+    loadMovieTrailer(id)
   }, []);
 
   const loadtMovieData = (id) => {
@@ -23,7 +25,7 @@ const MovieDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setSelectedMovies(data);
-        console.log(data);
+        // console.log(data);
       });
   }
 
@@ -32,11 +34,44 @@ const MovieDetails = () => {
     fetch(trailer_url)
       .then((res) => res.json())
       .then((stats) => {
-        setSelectedTrailer(stats);
-        // console.log(stats.results);
+        setTrailerData(stats);
       })
   }
-       
+
+  const setTrailerData = (data) => {
+
+    console.log(data.results.find((stat) => stat.type === "Trailer"));
+
+    if (data.results.length === 1) {
+      setSelectedTrailer(data.results[0]);
+    } else if (data.results.length > 1) {
+      setSelectedTrailer(data.results.find((stat) => stat.type === "Trailer"));
+    } else {
+      console.log(data.results)
+    }
+  }
+
+  // const loadData = (id) => {
+  //   const P0 = getMovieData(id);
+  //   const P1 = getMovieTrailer(id);
+  //   Promise.all([P0, P1]).then(results => {
+  //     return results.map(result=>{
+  //       return result.json();
+  //     });
+  //   }).then(results=>{
+  //     setSelectedMovies(results[0]);
+  //     // console.log(results[1].results.find((stat) => stat.type === "Trailer"));
+  //   })
+  // }
+
+  // const getMovieData = (id) => {
+  //   return fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + process.env.REACT_APP_API_KEY)
+  // }
+
+  // const getMovieTrailer = (id) => {
+  //   return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY)
+  // }
+
   return (
     <>
       {
@@ -51,11 +86,11 @@ const MovieDetails = () => {
                 <p className="movieInfo">Overview: {selectedMovie.overview}</p>
                 <p className="movieInfo">Release Date: {selectedMovie.release_date}</p>
                 <p className="movieInfo">Rating: {selectedMovie.vote_average}</p>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/-FmWuCgJmxo?autoplay=1&mute=1"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media"
-                  allowfullscreen
+                <Button onClick={() => setModalShow(true)}>Watch Trailer</Button>
+                <Trailer 
+                  modalShow = {modalShow}
+                  setModalShow = {setModalShow}
+                  trailer = {selectedTrailer}
                 />
               </Col>
             </Row>
