@@ -18,24 +18,6 @@ const MovieDetails = () => {
     loadData(id)
   }, []);
 
-  // const loadtMovieData = (id) => {
-  //   const selectedMovie_url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + process.env.REACT_APP_API_KEY;
-  //   fetch(selectedMovie_url)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setSelectedMovies(data);
-  //       // console.log(data);
-  //     });
-  // }
-
-  // const loadMovieTrailer = (id) => {
-  //   const trailer_url = "https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY;
-  //   fetch(trailer_url)
-  //     .then((res) => res.json())
-  //     .then((stats) => {
-  //       setTrailerData(stats);
-  //     })
-  // }
 
   const getMovieData = (id) => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + process.env.REACT_APP_API_KEY)
