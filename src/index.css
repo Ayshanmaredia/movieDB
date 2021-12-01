@@ -25,5 +25,21 @@ code {
 .movieName {
   font-size: 22px;
   font-weight: 500;
-  color: black;
+  color:#000;
+}
+
+.movieInfo {
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: 500px;
+  color: #000;
+  margin: 4px 0;
+}
+
+.movieInfo span {
+  opacity: 0.9;
+}
+
+.btn-trailer {
+  margin-top: 20px;
 }

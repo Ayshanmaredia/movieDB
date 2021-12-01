@@ -10,6 +10,7 @@ const MovieDetails = () => {
   const [selectedMovie, setSelectedMovies] = useState();
   const [selectedTrailer, setSelectedTrailer] = useState([]);
   const [modalShow, setModalShow] = useState();
+  const [disable, setDisable] = useState(false);
 
   const search = useLocation().search;
 
@@ -20,11 +21,11 @@ const MovieDetails = () => {
 
 
   const getMovieData = (id) => {
-    return fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + process.env.REACT_APP_API_KEY)
+    return fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + process.env.REACT_APP_API_KEY);
   }
 
   const getMovieTrailer = (id) => {
-    return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY)
+    return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY);
   }
 
   const loadData = (id) => {
@@ -41,12 +42,14 @@ const MovieDetails = () => {
 
   const setTrailerData = (data) => {
 
-    if (data.results.length === 1) {
-      setSelectedTrailer(data.results[0]);
+    console.log(data.results);
+
+    if (data.results.length === 0) {
+      setDisable(true);
     } else if (data.results.length > 1) {
-      setSelectedTrailer(data.results.find((stat) => stat.name === "Official Trailer"));
-    } else {
       setSelectedTrailer(data.results.find((stat) => stat.type === "Trailer"));
+    } else {
+      setSelectedTrailer(data.results[0]);
     }
   }
 
@@ -55,17 +58,19 @@ const MovieDetails = () => {
     <>
       {
         selectedMovie ?
-          <Container>
+          <Container className="mt-5">
             <Row>
               <Col md={4}>
                 <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
               </Col>
               <Col md={8}>
                 <p className="movieName">Movie: {selectedMovie.title}</p>
-                <p className="movieInfo">Overview: {selectedMovie.overview}</p>
-                <p className="movieInfo">Release Date: {selectedMovie.release_date}</p>
-                <p className="movieInfo">Rating: {selectedMovie.vote_average}</p>
-                <Button onClick={() => setModalShow(true)}>Watch Trailer</Button>
+                <p className="movieInfo">Overview: <span>{selectedMovie.overview}</span></p>
+                <p className="movieInfo">Release Date: <span>{selectedMovie.release_date}</span></p>
+                <p className="movieInfo">Rating: <span>{selectedMovie.vote_average}</span></p>
+                <Button className="btn-trailer" variant={`${disable ? "secondary" : "primary"}`} disabled={disable} onClick={() => setModalShow(true)}>
+                  Watch Trailer
+                </Button>
                 <Trailer
                   modalShow={modalShow}
                   setModalShow={setModalShow}
