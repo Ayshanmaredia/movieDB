@@ -1,29 +1,52 @@
-import React from 'react';
-import { Dropdown, Form, FormControl, Button } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 
-const MovieDropdown = ({ setFilterType }) => {
+const MovieDropdown = ({ setSearchValue, loadFilterType }) => {
+
+    const [tempSearchValue, setTempSearchValue] = useState();
+
+    const handleChange = (event) => {
+        setTempSearchValue(event.target.value);
+    }
+
+    const onDropdownItemClick = (pathName) => {
+        loadFilterType(pathName);
+    }
+
+    const onSearchClick = () => {
+        setSearchValue(tempSearchValue);
+    };
 
     return (
-        <Dropdown>
-            <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                Movie Categories
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setFilterType("popular")}>Popular Movies</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterType("top_rated")}>Top Rated Movies</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterType("upcoming")}>Upcoming Movies</Dropdown.Item>
-            </Dropdown.Menu>
-            <Form className="d-flex">
-                <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-            </Form>
-        </Dropdown>
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Collapse id="navbarScroll">
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                        <NavDropdown title="Categories" id="navbarScrollingDropdown" value="popular">
+                            <NavDropdown.Item onClick={() => onDropdownItemClick("popular")}>Popular Movies</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onDropdownItemClick("top_rated")}>Top Rated Movies</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                    <Form className="d-flex">
+                        <FormControl
+                            type="search"
+                            placeholder="Search"
+                            className="me-2"
+                            onChange={handleChange}
+                            aria-label="Search"
+                        />
+                        <Button onClick={onSearchClick} variant="outline-success">Search</Button>
+                    </Form>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 };
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import Trailer from "../components/Trailer";
 
 const MovieDetails = () => {
+
+  let history = useHistory();
 
   const img_url = "https://image.tmdb.org/t/p/w500";
 
@@ -42,8 +44,6 @@ const MovieDetails = () => {
 
   const setTrailerData = (data) => {
 
-    console.log(data.results);
-
     if (data.results.length === 0) {
       setDisable(true);
     } else if (data.results.length > 1) {
@@ -53,15 +53,17 @@ const MovieDetails = () => {
     }
   }
 
-
   return (
     <>
       {
         selectedMovie ?
           <Container className="mt-5">
+            <Button className="mb-3" onClick={() =>history.goBack()} variant="secondary" size="sm">
+              Go Back
+            </Button>
             <Row>
               <Col md={4}>
-                <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
+                <Image className="coverImage" src={`${selectedMovie.poster_path ? img_url + selectedMovie.poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} /> 
               </Col>
               <Col md={8}>
                 <p className="movieName">Movie: {selectedMovie.title}</p>

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 const App = () => (
   <Router>
     <Switch>
-      <Route path="/" exact component={Home} />
+      <Route path={["/", "/popular", "/top_rated", "/upcoming"]} exact component={Home} />
       <Route path="/movieDetails" component={MovieDetails} />
     </Switch>
   </Router>
