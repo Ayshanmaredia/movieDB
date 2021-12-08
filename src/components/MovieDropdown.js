@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import { useHistory, useLocation } from "react-router-dom";
 
-const MovieDropdown = ({ setSearchValue, loadFilterType }) => {
+const MovieDropdown = ({ setSearchValue, loadFilterType, getMovieRequest }) => {
 
     const [tempSearchValue, setTempSearchValue] = useState();
+
+    const history = useHistory();
 
     const handleChange = (event) => {
         setTempSearchValue(event.target.value);
@@ -14,7 +17,11 @@ const MovieDropdown = ({ setSearchValue, loadFilterType }) => {
     }
 
     const onSearchClick = () => {
-        setSearchValue(tempSearchValue);
+        // setSearchValue(tempSearchValue);
+        getMovieRequest(tempSearchValue);
+        history.push({
+            search: '?search=' + tempSearchValue
+        })
     };
 
     return (

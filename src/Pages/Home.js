@@ -13,19 +13,27 @@ const Home = () => {
   const history = useHistory();
   let location = useLocation();
 
-  useEffect(() => {
-    let pathName = location.pathname;
-    if (pathName === "/") {
-      pathName = "popular";
-    } else {
-      pathName = pathName.replace('/', "")
-    }
-    loadFilterType(pathName);
-  }, []);
+  const search = useLocation().search;
+  console.log(search);
 
   useEffect(() => {
-    getMovieRequest(searchValue);
-  }, [searchValue])
+    loadPage();
+  }, []);
+
+  const loadPage = () => {
+    const searchValue = new URLSearchParams(search).get('search');
+    if (searchValue) {
+      getMovieRequest(searchValue)
+    } else {
+      let pathName = location.pathname;
+      if (pathName === "/") {
+        pathName = "popular";
+      } else {
+        pathName = pathName.replace('/', "")
+      }
+      loadFilterType(pathName);
+    }
+  }
 
   const getMovieRequest = (searchValue) => {
     if (searchValue) {
@@ -55,6 +63,7 @@ const Home = () => {
       <MovieDropdown
         setSearchValue={setSearchValue}
         loadFilterType={loadFilterType}
+        getMovieRequest={getMovieRequest}
       />
       <Container className="my-2">
         <Row>
