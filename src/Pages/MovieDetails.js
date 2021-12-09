@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import Trailer from "../components/Trailer";
+import SimilarMovies from "../components/SimilarMovies";
 
 const MovieDetails = () => {
 
@@ -29,6 +30,7 @@ const MovieDetails = () => {
   const getMovieTrailer = (id) => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY);
   }
+
 
   const loadData = (id) => {
     const P0 = getMovieData(id);
@@ -58,12 +60,12 @@ const MovieDetails = () => {
       {
         selectedMovie ?
           <Container className="mt-5">
-            <Button className="mb-3" onClick={() =>history.goBack()} variant="secondary" size="sm">
+            <Button className="mb-3" onClick={() => history.goBack()} variant="secondary" size="sm">
               Go Back
             </Button>
             <Row>
               <Col md={4}>
-                <Image className="coverImage" src={`${selectedMovie.poster_path ? img_url + selectedMovie.poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} /> 
+                <Image className="coverImage" src={`${selectedMovie.poster_path ? img_url + selectedMovie.poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} />
               </Col>
               <Col md={8}>
                 <p className="movieName">Movie: {selectedMovie.title}</p>
@@ -86,6 +88,7 @@ const MovieDetails = () => {
             Loading...
           </div>
       }
+      <SimilarMovies />
     </>
   );
 };

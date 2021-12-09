@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Movie from "../components/Movie";
 import { Container, Row, Col } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
+import Movie from "../components/Movie";
 import MovieDropdown from "../components/MovieDropdown";
 
 const base_url = "https://api.themoviedb.org/3/";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
 
   const history = useHistory();
   let location = useLocation();
@@ -23,7 +22,7 @@ const Home = () => {
   const loadPage = () => {
     const searchValue = new URLSearchParams(search).get('search');
     if (searchValue) {
-      getMovieRequest(searchValue)
+      getSearchRequest(searchValue)
     } else {
       let pathName = location.pathname;
       if (pathName === "/") {
@@ -35,7 +34,7 @@ const Home = () => {
     }
   }
 
-  const getMovieRequest = (searchValue) => {
+  const getSearchRequest = (searchValue) => {
     if (searchValue) {
       fetch(base_url + `search/movie?api_key=` + process.env.REACT_APP_API_KEY + `&language=en-US&query=${searchValue}&page=1&include_adult=false`)
         .then((res) => res.json())
@@ -61,9 +60,8 @@ const Home = () => {
   return (
     <div>
       <MovieDropdown
-        setSearchValue={setSearchValue}
         loadFilterType={loadFilterType}
-        getMovieRequest={getMovieRequest}
+        getSearchRequest={getSearchRequest}
       />
       <Container className="my-2">
         <Row>

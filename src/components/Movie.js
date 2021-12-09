@@ -12,7 +12,7 @@ const Movie = ({ id, poster_path, title, vote_average }) => {
         <Card.Img variant="top" src={`${poster_path ? img_url + poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} />
         <Card.Body>
           <Card.Title className="truncate">{title}</Card.Title>
-          <Card.Text>Rating: {vote_average}</Card.Text>
+          <Card.Text>Rating: {vote_average.toFixed(1)}</Card.Text>
         </Card.Body>
       </Card>
     </Link>
