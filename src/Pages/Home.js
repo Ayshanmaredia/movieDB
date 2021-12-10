@@ -13,7 +13,6 @@ const Home = () => {
   let location = useLocation();
 
   const search = useLocation().search;
-  console.log(search);
 
   useEffect(() => {
     loadPage();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Image, Button, Spinner } from "react-bootstrap";
 import Trailer from "../components/Trailer";
 import SimilarMovies from "../components/SimilarMovies";
 
@@ -16,11 +16,13 @@ const MovieDetails = () => {
   const [disable, setDisable] = useState(false);
 
   const search = useLocation().search;
+  const location = useLocation();
 
   useEffect(() => {
     const id = new URLSearchParams(search).get('id');
-    loadData(id)
-  }, []);
+    window.scrollTo(0, 0)
+    loadData(id);
+  }, [location]);
 
 
   const getMovieData = (id) => {
@@ -30,7 +32,6 @@ const MovieDetails = () => {
   const getMovieTrailer = (id) => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY);
   }
-
 
   const loadData = (id) => {
     const P0 = getMovieData(id);
@@ -59,7 +60,7 @@ const MovieDetails = () => {
     <>
       {
         selectedMovie ?
-          <Container className="mt-5">
+          <Container className="my-5">
             <Button className="mb-3" onClick={() => history.goBack()} variant="secondary" size="sm">
               Go Back
             </Button>
@@ -84,9 +85,9 @@ const MovieDetails = () => {
             </Row>
           </Container>
           :
-          <div>
-            Loading...
-          </div>
+          <Container className="text-center mt-5">
+            <Spinner animation="border" variant="success" />
+          </Container>
       }
       <SimilarMovies />
     </>
