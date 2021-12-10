@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const img_url = "https://image.tmdb.org/t/p/w500";
 
@@ -9,7 +10,15 @@ const Movie = ({ id, poster_path, title, vote_average }) => {
   return (
     <Link className="nav-link text-dark" to={`/movieDetails?id=${id}`}>
       <Card className="my-5" style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={`${poster_path ? img_url + poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} />
+        {poster_path ?
+          <Card.Img variant="top" src={img_url + poster_path} />
+          :
+          <div className="moviePosterParent">
+            <div className="moviePoster">
+              <FontAwesomeIcon icon="file-image" />
+            </div>
+          </div>
+        }
         <Card.Body>
           <Card.Title className="truncate">{title}</Card.Title>
           <Card.Text>Rating: {vote_average.toFixed(1)}</Card.Text>

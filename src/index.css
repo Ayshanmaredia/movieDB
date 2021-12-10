@@ -19,7 +19,7 @@ code {
 }
 
 .coverImage {
-  height: 510px;
+  height: 490px;
 }
 
 .movieName {
@@ -42,4 +42,46 @@ code {
 
 .btn-trailer {
   margin-top: 20px;
+}
+
+.profile {
+  object-fit: cover;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.moviePosterParent {
+  height: 410px;
+  width: auto;
+  background: #F3F4F7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moviePoster {
+  font-size: 350px;
+  display: flex;
+  justify-content: center;
+  color: gray;
+}
+
+.userIconParent {
+  height: 200px;
+  width: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F3F4F7;
+  border-radius: 50%;
+}
+
+.userIcon {
+  font-size: 130px;
+  color: gray;
+  display: flex;
+  justify-content: center;
 }

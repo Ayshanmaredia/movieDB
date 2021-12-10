@@ -1,4 +1,5 @@
 import React from "react";
+import "./components/FontAwesomeIcons";
 import Home from "./Pages/Home";
 import MovieDetails from "./Pages/MovieDetails";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

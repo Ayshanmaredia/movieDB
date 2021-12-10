@@ -3,6 +3,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import { Container, Row, Col, Image, Button, Spinner } from "react-bootstrap";
 import Trailer from "../components/Trailer";
 import SimilarMovies from "../components/SimilarMovies";
+import Cast from "../components/Cast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MovieDetails = () => {
 
@@ -14,6 +16,7 @@ const MovieDetails = () => {
   const [selectedTrailer, setSelectedTrailer] = useState([]);
   const [modalShow, setModalShow] = useState();
   const [disable, setDisable] = useState(false);
+  const [credits, setCredits] = useState();
 
   const search = useLocation().search;
   const location = useLocation();
@@ -33,17 +36,24 @@ const MovieDetails = () => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY);
   }
 
+  const getCredits = (id) => {
+    return fetch("https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US");
+  }
+
   const loadData = (id) => {
     const P0 = getMovieData(id);
     const P1 = getMovieTrailer(id);
+    const P2 = getCredits(id);
 
-    Promise.all([P0, P1])
+    Promise.all([P0, P1, P2])
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then((results) => {
         setSelectedMovies(results[0]);
         setTrailerData(results[1]);
+        setCredits(results[2].cast);
       });
   }
+  console.log(credits)
 
   const setTrailerData = (data) => {
 
@@ -66,7 +76,16 @@ const MovieDetails = () => {
             </Button>
             <Row>
               <Col md={4}>
-                <Image className="coverImage" src={`${selectedMovie.poster_path ? img_url + selectedMovie.poster_path : "https://t4.ftcdn.net/jpg/02/18/21/71/240_F_218217125_YNmy7cEeS2h4eZN8KHPxVEUSxIRzVMOu.jpg"}`} />
+                {selectedMovie.poster_path ?
+                  <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
+                  :
+                  <div className="moviePosterParent">
+                    <div className="moviePoster">
+                      <FontAwesomeIcon icon="file-image" />
+                    </div>
+                  </div>
+                }
+
               </Col>
               <Col md={8}>
                 <p className="movieName">Movie: {selectedMovie.title}</p>
@@ -89,6 +108,16 @@ const MovieDetails = () => {
             <Spinner animation="border" variant="success" />
           </Container>
       }
+      <Container>
+        <Row>
+          {credits &&
+            credits.map((credit) => (
+              <Col>
+                <Cast key={credit.id} {...credit} />
+              </Col>
+            ))}
+        </Row>
+      </Container>
       <SimilarMovies />
     </>
   );
