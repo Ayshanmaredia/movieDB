@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { Container, Row, Col, Image, Button, Spinner } from "react-bootstrap";
-import Trailer from "../components/Trailer";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
+import MovieInfo from "../components/MovieInfo";
 import SimilarMovies from "../components/SimilarMovies";
 import Cast from "../components/Cast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MovieDetails = () => {
 
-  let history = useHistory();
-
   const img_url = "https://image.tmdb.org/t/p/w500";
+
+  let history = useHistory();
 
   const [selectedMovie, setSelectedMovies] = useState();
   const [selectedTrailer, setSelectedTrailer] = useState([]);
@@ -78,43 +77,19 @@ const MovieDetails = () => {
     <>
       {
         selectedMovie ?
-          <Container className="my-5">
-            <Button className="mb-3" onClick={() => history.goBack()} variant="secondary" size="sm">
-              Go Back
-            </Button>
-            <Row>
-              <Col md={4}>
-                {selectedMovie.poster_path ?
-                  <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
-                  :
-                  <div className="moviePosterParent">
-                    <div className="moviePoster">
-                      <FontAwesomeIcon icon="file-image" />
-                    </div>
-                  </div>
-                }
-
-              </Col>
-              <Col md={8}>
-                <p className="movieName">Movie: {selectedMovie.title}</p>
-                <p className="movieInfo">Overview: <span>{selectedMovie.overview}</span></p>
-                <p className="movieInfo">Release Date: <span>{selectedMovie.release_date}</span></p>
-                <p className="movieInfo">Rating: <span>{selectedMovie.vote_average}</span></p>
-                <Button className="btn-trailer" variant={`${disable ? "secondary" : "primary"}`} disabled={disable} onClick={() => setModalShow(true)}>
-                  Watch Trailer
-                </Button>
-                <Trailer
-                  modalShow={modalShow}
-                  setModalShow={setModalShow}
-                  trailer={selectedTrailer}
-                />
-              </Col>
-            </Row>
-          </Container>
+          <MovieInfo
+            img_url={img_url}
+            history={history}
+            selectedMovie={selectedMovie}
+            selectedTrailer={selectedTrailer}
+            modalShow={modalShow}
+            setModalShow={setModalShow}
+            disable={disable}
+          />
           :
-          <Container className="text-center mt-5">
-            <Spinner animation="border" variant="success" />
-          </Container>
+            <div className="spinner">
+              <Spinner animation="border" variant="success" />
+            </div>
       }
       <Container>
         <Row>
