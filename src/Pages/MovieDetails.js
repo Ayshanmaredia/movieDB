@@ -76,32 +76,34 @@ const MovieDetails = () => {
   return (
     <>
       {
-        selectedMovie ?
-          <MovieInfo
-            img_url={img_url}
-            history={history}
-            selectedMovie={selectedMovie}
-            selectedTrailer={selectedTrailer}
-            modalShow={modalShow}
-            setModalShow={setModalShow}
-            disable={disable}
-          />
+        selectedMovie && credits && similarMovies ?
+          <>
+            <MovieInfo
+              img_url={img_url}
+              history={history}
+              selectedMovie={selectedMovie}
+              selectedTrailer={selectedTrailer}
+              modalShow={modalShow}
+              setModalShow={setModalShow}
+              disable={disable}
+            />
+            <Container>
+              <Row>
+                {credits &&
+                  credits.map((credit) => (
+                    <Col>
+                      <Cast key={credit.id} {...credit} />
+                    </Col>
+                  ))}
+              </Row>
+            </Container>
+            <SimilarMovies similarMovies={similarMovies} />
+          </>
           :
-            <div className="spinner">
-              <Spinner animation="border" variant="success" />
-            </div>
+          <div className="spinner">
+            <Spinner animation="border" variant="success" />
+          </div>
       }
-      <Container>
-        <Row>
-          {credits &&
-            credits.map((credit) => (
-              <Col>
-                <Cast key={credit.id} {...credit} />
-              </Col>
-            ))}
-        </Row>
-      </Container>
-      <SimilarMovies similarMovies={similarMovies} />
     </>
   );
 };
