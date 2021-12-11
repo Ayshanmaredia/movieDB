@@ -16,6 +16,7 @@ const MovieDetails = () => {
   const [selectedTrailer, setSelectedTrailer] = useState([]);
   const [modalShow, setModalShow] = useState();
   const [disable, setDisable] = useState(false);
+  const [similarMovies, setSimilarMovies] = useState();
   const [credits, setCredits] = useState();
 
   const search = useLocation().search;
@@ -36,6 +37,10 @@ const MovieDetails = () => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + process.env.REACT_APP_API_KEY);
   }
 
+  const getSimilarMovies = (id) => {
+    return fetch("https://api.themoviedb.org/3/movie/" + id + "/similar?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US&page=1");
+  }
+
   const getCredits = (id) => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US");
   }
@@ -43,17 +48,20 @@ const MovieDetails = () => {
   const loadData = (id) => {
     const P0 = getMovieData(id);
     const P1 = getMovieTrailer(id);
-    const P2 = getCredits(id);
+    const P2 = getSimilarMovies(id)
+    const P3 = getCredits(id);
 
-    Promise.all([P0, P1, P2])
+    Promise.all([P0, P1, P2, P3])
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then((results) => {
         setSelectedMovies(results[0]);
         setTrailerData(results[1]);
-        setCredits(results[2].cast);
+        setSimilarMovies(results[2].results)
+        setCredits(results[3].cast);
       });
   }
-  console.log(credits)
+
+  console.log(similarMovies)
 
   const setTrailerData = (data) => {
 
@@ -118,7 +126,7 @@ const MovieDetails = () => {
             ))}
         </Row>
       </Container>
-      <SimilarMovies />
+      <SimilarMovies similarMovies={similarMovies} />
     </>
   );
 };
