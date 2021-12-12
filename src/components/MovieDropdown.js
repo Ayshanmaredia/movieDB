@@ -16,6 +16,12 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest }) => {
         loadFilterType(pathName);
     }
 
+    const handleKeyPress = (e) => {
+        if (e.charCode === 13) {
+            onSearchClick();
+        }
+    }
+
     const onSearchClick = () => {
         getSearchRequest(tempSearchValue);
         history.push({
@@ -40,15 +46,16 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest }) => {
                             <NavDropdown.Item onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form className="d-flex">
+                    <Form className="d-flex" onSubmit={e => e.preventDefault()}>
                         <FormControl
                             type="search"
                             placeholder="Search"
                             className="me-2"
                             onChange={handleChange}
+                            onKeyPress={handleKeyPress}
                             aria-label="Search"
                         />
-                        <Button onClick={onSearchClick} variant="outline-success">Search</Button>
+                        <Button onClick={onSearchClick} variant="outline-success" type="button">Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>

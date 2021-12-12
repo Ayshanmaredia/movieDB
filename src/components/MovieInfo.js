@@ -24,7 +24,10 @@ const MovieInfo = ({ img_url, history, selectedMovie, selectedTrailer, modalShow
 
                 </Col>
                 <Col md={8}>
-                    <p className="movieName">Movie: {selectedMovie.title}</p>
+                    <h1 className="movieName">Movie: {selectedMovie.title}</h1>
+                    <div>
+                        {selectedMovie.genres.map((g) => <div className="genrePill"> {g.name} </div>)}
+                    </div>
                     <p className="movieInfo">Overview: <span>{selectedMovie.overview}</span></p>
                     <p className="movieInfo">Release Date: <span>{selectedMovie.release_date}</span></p>
                     <p className="movieInfo">Rating: <span>{selectedMovie.vote_average}</span></p>

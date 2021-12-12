@@ -17,6 +17,7 @@ const MovieDetails = () => {
   const [disable, setDisable] = useState(false);
   const [similarMovies, setSimilarMovies] = useState();
   const [credits, setCredits] = useState();
+  // const [genre, setGenre] = useState();
 
   const search = useLocation().search;
   const location = useLocation();
@@ -44,6 +45,10 @@ const MovieDetails = () => {
     return fetch("https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US");
   }
 
+  // const getGenre = () => {
+  //   return fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US")
+  // }
+
   const loadData = (id) => {
     const P0 = getMovieData(id);
     const P1 = getMovieTrailer(id);
@@ -52,15 +57,13 @@ const MovieDetails = () => {
 
     Promise.all([P0, P1, P2, P3])
       .then(responses => Promise.all(responses.map(r => r.json())))
-      .then((results) => {
-        setSelectedMovies(results[0]);
-        setTrailerData(results[1]);
-        setSimilarMovies(results[2].results)
-        setCredits(results[3].cast);
+      .then((datas) => {
+        setSelectedMovies(datas[0]);
+        setTrailerData(datas[1]);
+        setSimilarMovies(datas[2].results)
+        setCredits(datas[3].cast);
       });
   }
-
-  console.log(similarMovies)
 
   const setTrailerData = (data) => {
 

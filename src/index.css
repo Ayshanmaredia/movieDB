@@ -23,8 +23,6 @@ code {
 }
 
 .movieName {
-  font-size: 22px;
-  font-weight: 500;
   color:#000;
 }
 
@@ -92,4 +90,13 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.genrePill {
+  padding: 5px 15px;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 30px;
+  background-color: gray;
+  color: #FFF
 }
