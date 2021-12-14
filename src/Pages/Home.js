@@ -8,6 +8,7 @@ const base_url = "https://api.themoviedb.org/3/";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [message, setMessage] = useState();
 
   const history = useHistory();
   let location = useLocation();
@@ -38,7 +39,11 @@ const Home = () => {
       fetch(base_url + `search/movie?api_key=` + process.env.REACT_APP_API_KEY + `&language=en-US&query=${searchValue}&page=1&include_adult=false`)
         .then((res) => res.json())
         .then((data) => {
-          setMovies(data.results);
+          if (data.results.length === 0) {
+            setMessage("No results found")
+          } else {
+            setMovies(data.results);
+          }
         });
     }
   }
@@ -52,6 +57,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
+        console.log(data.results);
         history.push(pathName);
       });
   }
@@ -61,18 +67,29 @@ const Home = () => {
       <MovieDropdown
         loadFilterType={loadFilterType}
         getSearchRequest={getSearchRequest}
+        message={message}
+        setMessage={setMessage}
       />
-      <Container className="my-2">
-        <Row>
-          {movies.length &&
-            movies.map((movie) => (
-              <Col md={3}>
-                <Movie key={movie.id} {...movie}
-                />
-              </Col>
-            ))}
-        </Row>
-      </Container>
+      <div className="home-page-body">
+        <Container>
+          <Row>
+            <Col className="text-center">
+              <b>{message}</b>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            {movies.length &&
+              movies.map((movie) => (
+                <Col md={3} xs={12}>
+                  <Movie key={movie.id} {...movie}
+                  />
+                </Col>
+              ))}
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };

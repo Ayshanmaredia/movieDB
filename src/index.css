@@ -1,15 +1,83 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+.primary-color {
+  color: #f2f4f6 !important;
+  opacity: 0.9;
+}
+
+.secondary-color {
+  color: #8197a4;
+}
+
+/* -------------------- MovieDropdown component -------------------- */
+
+.navbar-main {
+  background-color: #1a242f;
+}
+
+.search-box {
+  background-color: #0f171e;
+  border: 1px solid #0f79af;
+}
+
+.search-box:focus {
+  background-color: #0f171e;
+  border-color: #0f79af;
+}
+
+.search-button {
+  background-color: #0f171e;
+  border-color: #0f79af;
+}
+
+.search-button:hover {
+  background-color: #0f79af;
+  border-color: #0f171e;
+}
+
+.search-button:focus {
+  border-color: #0f79af;
+}
+
+
+/* -------------------- home page -------------------- */
+
+.home-page-body {
+  margin-top: 56px;
+  background-color: #0f171e;
+}
+
+/* -------------------- Movie component -------------------- */
+
+.card-main {
+  border: none;
+  margin: 25px 0;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #1a242f;
+}
+
+.card-main:hover {
+  box-shadow: 0 14px 28px rgba(15, 121, 175, 0.35),
+    0 10px 10px rgba(15, 121, 175, 0.32);
+}
+
+.card-body-wrapper {
+  background-color: #1a242f;
+  color: #fff;
 }
 
 .truncate {
@@ -18,12 +86,39 @@ code {
   text-overflow: ellipsis;
 }
 
+/* -------------------- MovieInfo component -------------------- */
+
 .coverImage {
   height: 490px;
 }
 
+.moviePosterParent {
+  height: 411px;
+  width: auto;
+  background: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moviePoster {
+  font-size: 250px;
+  display: flex;
+  justify-content: center;
+  color: lightgray;
+}
+
 .movieName {
-  color:#000;
+  color: #000;
+}
+
+.genrePill {
+  padding: 5px 15px;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 30px;
+  background-color: gray;
+  color: #fff;
 }
 
 .movieInfo {
@@ -42,6 +137,8 @@ code {
   margin-top: 20px;
 }
 
+/* -------------------- Cast component -------------------- */
+
 .profile {
   object-fit: cover;
 }
@@ -51,29 +148,13 @@ code {
   font-weight: 500;
 }
 
-.moviePosterParent {
-  height: 410px;
-  width: auto;
-  background: #F3F4F7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.moviePoster {
-  font-size: 350px;
-  display: flex;
-  justify-content: center;
-  color: gray;
-}
-
 .userIconParent {
   height: 200px;
   width: 210px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #F3F4F7;
+  background: #f3f4f7;
   border-radius: 50%;
 }
 
@@ -84,6 +165,8 @@ code {
   justify-content: center;
 }
 
+/* -------------------- Spin component -------------------- */
+
 .spinner {
   height: 100vh;
   width: 100%;
@@ -92,11 +175,20 @@ code {
   align-items: center;
 }
 
-.genrePill {
-  padding: 5px 15px;
-  margin-right: 5px;
-  display: inline-block;
-  border-radius: 30px;
-  background-color: gray;
-  color: #FFF
+/* -------------------- overriding bootstrap -------------------- */
+
+.dropdown-menu {
+  background-color: #1a242f;
+}
+
+.nav-item.dropdown > a {
+  color: #f2f4f6 !important;
+  opacity: 0.9;
+  transition: 0.2s all;
+}
+
+.nav-item.dropdown > a:hover {
+  color: #fff !important;
+  opacity: 1;
+  font-weight: 500;
 }

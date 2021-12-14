@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-const MovieDropdown = ({ loadFilterType, getSearchRequest }) => {
+const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }) => {
 
     const [tempSearchValue, setTempSearchValue] = useState();
 
@@ -23,43 +23,49 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest }) => {
     }
 
     const onSearchClick = () => {
-        getSearchRequest(tempSearchValue);
-        history.push({
-            search: '?search=' + tempSearchValue
-        })
+        if (tempSearchValue) {
+            setMessage("Search results for " + tempSearchValue);
+            getSearchRequest(tempSearchValue);
+            history.push({
+                search: '?search=' + tempSearchValue
+            })
+        }
     };
 
     return (
-        <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                        <NavDropdown title="Categories" id="navbarScrollingDropdown" value="popular">
-                            <NavDropdown.Item onClick={() => onDropdownItemClick("popular")}>Popular Movies</NavDropdown.Item>
-                            <NavDropdown.Item onClick={() => onDropdownItemClick("top_rated")}>Top Rated Movies</NavDropdown.Item>
-                            <NavDropdown.Item onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    <Form className="d-flex" onSubmit={e => e.preventDefault()}>
-                        <FormControl
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            onChange={handleChange}
-                            onKeyPress={handleKeyPress}
-                            aria-label="Search"
-                        />
-                        <Button onClick={onSearchClick} variant="outline-success" type="button">Search</Button>
-                    </Form>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <>
+            <Navbar className="navbar-main fixed-top"  expand="lg">
+                <Container>
+                    <Navbar.Brand className="primary-color" role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                        <Nav
+                            className="me-auto my-2 my-lg-0"
+                            style={{ maxHeight: '100px' }}
+                            navbarScroll
+                        >
+                            <NavDropdown title="Categories" id="navbarScrollingDropdown" value="popular">
+                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("popular")}>Popular Movies</NavDropdown.Item>
+                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("top_rated")}>Top Rated Movies</NavDropdown.Item>
+                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                        <Form className="d-flex" onSubmit={e => e.preventDefault()}>
+                            <FormControl
+                                type="search"
+                                placeholder="Search"
+                                className="me-2 search-box"
+                                onChange={handleChange}
+                                onKeyPress={handleKeyPress}
+                                aria-label="Search"
+                            />
+                            <Button  className="search-button primary-color" onClick={onSearchClick} variant="outline-success" type="button">Search</Button>
+                        </Form>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </>
+
     );
 };
 

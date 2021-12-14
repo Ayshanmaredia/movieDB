@@ -9,7 +9,7 @@ const Movie = ({ id, poster_path, title, vote_average }) => {
 
   return (
     <Link className="nav-link text-dark" to={`/movieDetails?id=${id}`}>
-      <Card className="my-5" style={{ width: "18rem" }}>
+      <Card className="card-main">
         {poster_path ?
           <Card.Img variant="top" src={img_url + poster_path} />
           :
@@ -19,7 +19,7 @@ const Movie = ({ id, poster_path, title, vote_average }) => {
             </div>
           </div>
         }
-        <Card.Body>
+        <Card.Body className="card-body-wrapper">
           <Card.Title className="truncate">{title}</Card.Title>
           <Card.Text>Rating: {vote_average.toFixed(1)}</Card.Text>
         </Card.Body>

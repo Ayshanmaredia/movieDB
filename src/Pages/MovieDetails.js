@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import MovieInfo from "../components/MovieInfo";
 import SimilarMovies from "../components/SimilarMovies";
 import Cast from "../components/Cast";
+import Spin from "../components/Spin";
 
 const MovieDetails = () => {
 
@@ -103,9 +104,7 @@ const MovieDetails = () => {
             <SimilarMovies similarMovies={similarMovies} />
           </>
           :
-          <div className="spinner">
-            <Spinner animation="border" variant="success" />
-          </div>
+          <Spin />
       }
     </>
   );
