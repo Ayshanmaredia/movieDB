@@ -11,7 +11,7 @@ const Movie = ({ id, poster_path, title, vote_average }) => {
     <Link className="nav-link text-dark" to={`/movieDetails?id=${id}`}>
       <Card className="card-main">
         {poster_path ?
-          <Card.Img variant="top" src={img_url + poster_path} />
+          <Card.Img className="cover-image" variant="top" src={img_url + poster_path} />
           :
           <div className="moviePosterParent">
             <div className="moviePoster">

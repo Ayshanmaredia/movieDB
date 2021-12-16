@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown, Form, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import ThemeButton from "../components/ThemeButton";
 
 const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }) => {
 
@@ -59,7 +60,10 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }
                                 onKeyPress={handleKeyPress}
                                 aria-label="Search"
                             />
-                            <Button  className="search-button primary-color" onClick={onSearchClick} variant="outline-success" type="button">Search</Button>
+                            <ThemeButton 
+                                onClick={onSearchClick}
+                                text="Search"
+                            />
                         </Form>
                     </Navbar.Collapse>
                 </Container>

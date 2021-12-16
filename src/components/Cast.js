@@ -6,11 +6,11 @@ const img_url = "https://image.tmdb.org/t/p/w200"
 
 const Cast = ({ profile_path, original_name, character }) => {
     return (
-        <Container>
+        <Container className="cast-container">
             <Row className="my-3 text-center d-inline">
                 <Col>
                     {profile_path ?
-                        <Image className="profile" height={200} width={210} src={img_url + profile_path} roundedCircle />
+                        <Image className="profile" height={96} width={96} src={img_url + profile_path} roundedCircle />
                         :
                         <div className="userIconParent">
                             <div className="userIcon">
@@ -19,9 +19,9 @@ const Cast = ({ profile_path, original_name, character }) => {
                         </div>
                     }
                 </Col>
-                <Col className="mt-1 text-center">
-                    <p className="m-0 p-0 name">{original_name}</p>
-                    <p className="m-0 p-0 character">{character}</p>
+                <Col className="mt-1 text-center text-white">
+                    <p className="name">{original_name}</p>
+                    <p className="character">{character}</p>
                 </Col>
             </Row>
         </Container>

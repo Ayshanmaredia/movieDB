@@ -40,7 +40,8 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.results.length === 0) {
-            setMessage("No results found")
+            setMessage("No results found");
+            setMovies(data.results);
           } else {
             setMovies(data.results);
           }
@@ -57,7 +58,6 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
-        console.log(data.results);
         history.push(pathName);
       });
   }
@@ -82,8 +82,10 @@ const Home = () => {
           <Row>
             {movies.length &&
               movies.map((movie) => (
-                <Col md={3} xs={12}>
-                  <Movie key={movie.id} {...movie}
+                <Col md={3}>
+                  <Movie
+                    key={movie.id}
+                    {...movie}
                   />
                 </Col>
               ))}

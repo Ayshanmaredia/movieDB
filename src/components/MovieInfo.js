@@ -1,19 +1,17 @@
 import React from 'react';
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Trailer from "../components/Trailer";
+import ThemeButton from "../components/ThemeButton";
 
-const MovieInfo = ({ img_url, history, selectedMovie, selectedTrailer, modalShow, setModalShow, disable }) => {
+const MovieInfo = ({ img_url, selectedMovie, selectedTrailer, modalShow, setModalShow, disable }) => {
 
     return (
         <Container className="my-5">
-            <Button className="mb-3" onClick={() => history.goBack()} variant="secondary" size="sm">
-                Go Back
-            </Button>
-            <Row>
-                <Col md={4}>
+            <Row className="mt-4">
+                <Col md={3}>
                     {selectedMovie.poster_path ?
-                        <Image className="coverImage" src={img_url + selectedMovie.poster_path} />
+                        <Image className="cover-image" src={img_url + selectedMovie.poster_path} />
                         :
                         <div className="moviePosterParent">
                             <div className="moviePoster">
@@ -23,17 +21,21 @@ const MovieInfo = ({ img_url, history, selectedMovie, selectedTrailer, modalShow
                     }
 
                 </Col>
-                <Col md={8}>
-                    <h1 className="movieName">Movie: {selectedMovie.title}</h1>
+                <Col md={9} >
+                    <h2 className="movieName">Movie: {selectedMovie.title}</h2>
                     <div>
-                        {selectedMovie.genres.map((g) => <div className="genrePill"> {g.name} </div>)}
+                        {selectedMovie.genres.map((g) => <div className="genrePill primary-color"> {g.name} </div>)}
                     </div>
                     <p className="movieInfo">Overview: <span>{selectedMovie.overview}</span></p>
                     <p className="movieInfo">Release Date: <span>{selectedMovie.release_date}</span></p>
                     <p className="movieInfo">Rating: <span>{selectedMovie.vote_average}</span></p>
-                    <Button className="btn-trailer" variant={`${disable ? "secondary" : "primary"}`} disabled={disable} onClick={() => setModalShow(true)}>
-                        Watch Trailer
-                    </Button>
+                    <div className="mt-4">
+                        <ThemeButton
+                            disable={disable}
+                            onClick={() => setModalShow(true)}
+                            text="Watch Trailer"
+                        />
+                    </div>
                     <Trailer
                         modalShow={modalShow}
                         setModalShow={setModalShow}

@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0f171e;
+  margin-top: 56px;
+  margin-bottom: 30px;
 }
 
 code {
@@ -12,6 +15,11 @@ code {
     monospace;
 }
 
+/* -------------------- Common class -------------------- */
+
+hr {
+  border-bottom: 1px solid #8197a4 ;
+}
 
 .primary-color {
   color: #f2f4f6 !important;
@@ -31,34 +39,36 @@ code {
 .search-box {
   background-color: #0f171e;
   border: 1px solid #0f79af;
+  color: #fff !important;
+  font-weight: 100;
 }
 
 .search-box:focus {
   background-color: #0f171e;
-  border-color: #0f79af;
+  border-color: #1399de;
+  box-shadow: none;
 }
 
-.search-button {
-  background-color: #0f171e;
-  border-color: #0f79af;
-}
-
-.search-button:hover {
+.theme-button {
   background-color: #0f79af;
-  border-color: #0f171e;
+  color: #f2f4f6
 }
 
-.search-button:focus {
-  border-color: #0f79af;
+.theme-button:hover {
+  background-color: #1399de;
+  color: #fff;
 }
 
+.theme-button:focus {
+  box-shadow: none;
+}
 
 /* -------------------- home page -------------------- */
 
-.home-page-body {
+/* .home-page-body {
   margin-top: 56px;
   background-color: #0f171e;
-}
+} */
 
 /* -------------------- Movie component -------------------- */
 
@@ -88,13 +98,19 @@ code {
 
 /* -------------------- MovieInfo component -------------------- */
 
-.coverImage {
-  height: 490px;
+.back-button {
+  margin-bottom: 15px;
+  background-color: #0f79af;
+}
+
+.cover-image {
+  height: 350px;
+  width: 274px;
 }
 
 .moviePosterParent {
-  height: 411px;
-  width: auto;
+  height: 350px;
+  width: 274px;
   background: #212121;
   display: flex;
   justify-content: center;
@@ -102,14 +118,14 @@ code {
 }
 
 .moviePoster {
-  font-size: 250px;
+  font-size: 200px;
   display: flex;
   justify-content: center;
   color: lightgray;
 }
 
 .movieName {
-  color: #000;
+  color: #fff;
 }
 
 .genrePill {
@@ -117,7 +133,7 @@ code {
   margin-right: 5px;
   display: inline-block;
   border-radius: 30px;
-  background-color: gray;
+  background-color: #425265;
   color: #fff;
 }
 
@@ -125,7 +141,7 @@ code {
   padding: 5px 0;
   font-size: 16px;
   font-weight: 500px;
-  color: #000;
+  color: #fff;
   margin: 4px 0;
 }
 
@@ -133,24 +149,39 @@ code {
   opacity: 0.9;
 }
 
-.btn-trailer {
-  margin-top: 20px;
+.button-disable { 
+  background-color: gray !important;
+  border: none;
 }
 
 /* -------------------- Cast component -------------------- */
+
+.cast-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .profile {
   object-fit: cover;
 }
 
 .name {
-  font-size: 18px;
-  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.character {
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.54;
 }
 
 .userIconParent {
-  height: 200px;
-  width: 210px;
+  height: 96px;
+  width: 96px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +190,7 @@ code {
 }
 
 .userIcon {
-  font-size: 130px;
+  font-size: 55px;
   color: gray;
   display: flex;
   justify-content: center;
