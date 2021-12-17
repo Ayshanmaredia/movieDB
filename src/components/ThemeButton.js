@@ -1,13 +1,17 @@
 import React from 'react';
-import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ThemeButton = ({ onClick, text, disable }) => {
+const ThemeButton = ({ onClick, text, disable, iconType }) => {
     return (
-        <Button
+        <button
             className={`${disable ? "button-disable" : "theme-button"}`}
             onClick={onClick}
             disabled={disable}
-            type="button">{text}</Button>
+            type="button">
+            {iconType &&
+                <span className="theme-button-wrapper"><FontAwesomeIcon icon={iconType} /></span>}
+            {text}
+        </button>
     );
 };
 

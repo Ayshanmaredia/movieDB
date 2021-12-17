@@ -34,6 +34,7 @@ const MovieInfo = ({ img_url, selectedMovie, selectedTrailer, modalShow, setModa
                             disable={disable}
                             onClick={() => setModalShow(true)}
                             text="Watch Trailer"
+                            iconType="play-circle"
                         />
                     </div>
                     <Trailer

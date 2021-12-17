@@ -63,6 +63,7 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }
                             <ThemeButton 
                                 onClick={onSearchClick}
                                 text="Search"
+                                iconType="search"
                             />
                         </Form>
                     </Navbar.Collapse>
