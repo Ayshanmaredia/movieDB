@@ -6,6 +6,7 @@ import SimilarMovies from "../components/SimilarMovies";
 import Cast from "../components/Cast";
 import Spin from "../components/Spin";
 import ThemeButton from "../components/ThemeButton";
+import Navigation from "../components/Navigation";
 
 const MovieDetails = () => {
 
@@ -96,41 +97,45 @@ const MovieDetails = () => {
       {
         selectedMovie && credits && similarMovies ?
           <>
-            <MovieInfo
-              img_url={img_url}
-              selectedMovie={selectedMovie}
-              selectedTrailer={selectedTrailer}
-              modalShow={modalShow}
-              setModalShow={setModalShow}
-              disable={disable}
-            />
-            <Container>
-              <h3 className="text-white">Casts</h3>
-              <hr></hr>
-              <Row>
-                {credits &&
-                  credits.slice(0, visible).map((credit) => (
-                    <Col md={2}>
-                      <Cast
-                        key={credit.id}
-                        {...credit}
-                      />
-                    </Col>
-                  ))}
-              </Row>
-              <div className="d-flex justify-content-center">
-                <ThemeButton
-                  onClick={showMoreCast}
-                  text={visible === credits.length ? "Show less" : "Show all"}
-                />
-              </div>
-            </Container>
-            <SimilarMovies
-              similarMovies={similarMovies}
-              show={show}
-              showMoreMovies={showMoreMovies}
-            />
+            <Navigation />
+            <div className="movie-details-page-body">
+              <MovieInfo
+                img_url={img_url}
+                selectedMovie={selectedMovie}
+                selectedTrailer={selectedTrailer}
+                modalShow={modalShow}
+                setModalShow={setModalShow}
+                disable={disable}
+              />
+              <Container>
+                <h3 className="text-white">Casts</h3>
+                <hr></hr>
+                <Row>
+                  {credits &&
+                    credits.slice(0, visible).map((credit) => (
+                      <Col xs={4} md={2}>
+                        <Cast
+                          key={credit.id}
+                          {...credit}
+                        />
+                      </Col>
+                    ))}
+                </Row>
+                <div className="d-flex justify-content-center">
+                  <ThemeButton
+                    onClick={showMoreCast}
+                    text={visible === credits.length ? "Show less" : "Show all"}
+                  />
+                </div>
+              </Container>
+              <SimilarMovies
+                similarMovies={similarMovies}
+                show={show}
+                showMoreMovies={showMoreMovies}
+              />
+            </div>
           </>
+
           :
           <Spin />
       }

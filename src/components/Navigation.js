@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import ThemeButton from "../components/ThemeButton";
+import ThemeButton from "./ThemeButton";
+import { useData } from "../DataContext";
 
-const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }) => {
+const Navigation = () => {
 
-    const [tempSearchValue, setTempSearchValue] = useState();
+    const { loadData, getSearchRequest, setMessage, searchValue, setSearchValue } = useData();
+
+    
 
     const history = useHistory();
 
     const handleChange = (event) => {
-        setTempSearchValue(event.target.value);
+        setSearchValue(event.target.value);
     }
 
     const onDropdownItemClick = (pathName) => {
-        loadFilterType(pathName);
+        loadData(pathName, history);
     }
 
     const handleKeyPress = (e) => {
@@ -24,18 +27,19 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }
     }
 
     const onSearchClick = () => {
-        if (tempSearchValue) {
-            setMessage("Search results for " + tempSearchValue);
-            getSearchRequest(tempSearchValue);
+        if (searchValue) {
+            setMessage("Search results for " + searchValue);
+            getSearchRequest(searchValue);
             history.push({
-                search: '?search=' + tempSearchValue
+                pathname: '/popular',
+                search: '?search=' + searchValue
             })
         }
     };
 
     return (
         <>
-            <Navbar className="navbar-main fixed-top"  expand="lg">
+            <Navbar className="navbar-main fixed-top" expand="lg">
                 <Container>
                     <Navbar.Brand className="primary-color" role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -54,13 +58,14 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }
                         <Form className="d-flex" onSubmit={e => e.preventDefault()}>
                             <FormControl
                                 type="search"
+                                value={searchValue}
                                 placeholder="Search"
                                 className="me-2 search-box"
                                 onChange={handleChange}
                                 onKeyPress={handleKeyPress}
                                 aria-label="Search"
                             />
-                            <ThemeButton 
+                            <ThemeButton
                                 onClick={onSearchClick}
                                 text="Search"
                                 iconType="search"
@@ -74,4 +79,4 @@ const MovieDropdown = ({ loadFilterType, getSearchRequest, message, setMessage }
     );
 };
 
-export default MovieDropdown;
+export default Navigation;

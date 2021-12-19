@@ -6,8 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0f171e;
-  margin-top: 56px;
-  margin-bottom: 30px;
 }
 
 code {
@@ -30,6 +28,19 @@ hr {
   color: #8197a4;
 }
 
+/* -------------------- Home Page -------------------- */
+
+.home-page-body {
+  margin-top: 60px;
+}
+
+/*  */
+
+.movie-details-page-body {
+  margin-top: 90px;
+  margin-bottom: 30px ;
+}
+
 /* -------------------- MovieDropdown component -------------------- */
 
 .navbar-main {
@@ -48,13 +59,6 @@ hr {
   border-color: #1399de;
   box-shadow: none;
 }
-
-/* -------------------- home page -------------------- */
-
-/* .home-page-body {
-  margin-top: 56px;
-  background-color: #0f171e;
-} */
 
 /* -------------------- Movie component -------------------- */
 
@@ -91,12 +95,10 @@ hr {
 
 .cover-image {
   height: 350px;
-  width: 274px;
 }
 
 .moviePosterParent {
   height: 350px;
-  width: 274px;
   background: #212121;
   display: flex;
   justify-content: center;
@@ -133,11 +135,6 @@ hr {
 
 .movieInfo span {
   opacity: 0.9;
-}
-
-.button-disable { 
-  background-color: gray !important;
-  border: none;
 }
 
 /* -------------------- Cast component -------------------- */
@@ -215,6 +212,14 @@ hr {
 
 .theme-button-wrapper {
   margin-right: 7px;
+}
+
+.button-disable { 
+  background-color: gray !important;
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  padding: 0 10px;
 }
 
 /* -------------------- overriding bootstrap -------------------- */
