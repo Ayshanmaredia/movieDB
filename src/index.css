@@ -34,45 +34,40 @@ hr {
   margin-top: 60px;
 }
 
-/*  */
+/* ------------------- Movie Details Page ------------------ */
 
 .movie-details-page-body {
   margin-top: 90px;
   margin-bottom: 30px ;
 }
 
-/* -------------------- MovieDropdown component -------------------- */
+/* -------------------- Navigation component -------------------- */
 
 .navbar-main {
   background-color: #1a242f;
 }
 
-.search-box {
-  background-color: #0f171e;
-  border: 1px solid #0f79af;
-  color: #fff !important;
-  font-weight: 100;
-}
-
-.search-box:focus {
-  background-color: #0f171e;
-  border-color: #1399de;
-  box-shadow: none;
+.nav-link-wrapper {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
 }
 
 /* -------------------- Movie component -------------------- */
 
 .card-main {
+  max-width: 274px;
   border: none;
   margin: 25px 0;
   border-radius: 15px;
   overflow: hidden;
   background-color: #1a242f;
+  transition: 0.2s all;
 }
 
 .card-main:hover {
-  box-shadow: 0 14px 28px rgba(15, 121, 175, 0.35),
-    0 10px 10px rgba(15, 121, 175, 0.32);
+    border: 1.5px solid #1399de;
+    border-radius: 0;
 }
 
 .card-body-wrapper {
@@ -94,7 +89,8 @@ hr {
 }
 
 .cover-image {
-  height: 350px;
+  height: auto;
+  width: 274px;
 }
 
 .moviePosterParent {
@@ -197,7 +193,7 @@ hr {
   min-width: 100px;
   border: none;
   border-radius: 4px;
-  height: 40px;
+  height: 38px;
   padding: 0 10px;
 }
 
@@ -222,10 +218,66 @@ hr {
   padding: 0 10px;
 }
 
+/* -------------------- AutoSuggest component -------------------- */
+
+.search-box {
+  background-color: #0f171e;
+  border: 1px solid #0f79af;
+  color: #fff !important;
+  font-weight: 100;
+}
+
+.search-box:focus {
+  background-color: #0f171e;
+  border-color: #1399de;
+  box-shadow: none;
+}
+
+.autosuggest-container {
+  position: relative;
+}
+
+.autosuggest-wrapper {
+  position: absolute;
+  background-color: #252e39;
+  width: 220px;
+  top: 48px;
+  display: none;
+}
+
+.search-box:focus + .autosuggest-wrapper {
+  display: block;
+}
+.autosuggest-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.autosuggest-list > li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #0f171e;
+  cursor: pointer;
+}
+
+.autosuggest-list > li:hover {
+  background-color: #566b84;
+}
+
+.autosuggest-list > li > a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* -------------------- overriding bootstrap -------------------- */
 
 .dropdown-menu {
   background-color: #1a242f;
+}
+
+.dropdown-item:hover {
+  background-color: #566b84;
+  color: #fff;
 }
 
 .nav-item.dropdown > a {

@@ -1,20 +1,27 @@
-import React, { useState } from "react";
-import { Navbar, Container, Nav, NavDropdown, Form, FormControl } from "react-bootstrap";
+import React, { useCallback } from "react";
+import { Navbar, Container, Nav, NavDropdown, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import { useData } from "../DataContext";
+import debounce from "lodash.debounce";
+import AutoSuggest from "../components/AutoSuggest";
 
 const Navigation = () => {
 
-    const { loadData, getSearchRequest, setMessage, searchValue, setSearchValue } = useData();
-
-    
+    const { loadData, getSearchRequest, setMessage, searchValue, setSearchValue, searchDebounce } = useData();
 
     const history = useHistory();
 
-    const handleChange = (event) => {
-        setSearchValue(event.target.value);
-    }
+    const debouncedSave = useCallback(
+        debounce(nextValue => searchDebounce(nextValue), 1000),
+        [],
+    );
+
+    const handleChange = event => {
+        const { value: nextValue } = event.target;
+        setSearchValue(nextValue);
+        debouncedSave(nextValue);
+    };
 
     const onDropdownItemClick = (pathName) => {
         loadData(pathName, history);
@@ -31,7 +38,7 @@ const Navigation = () => {
             setMessage("Search results for " + searchValue);
             getSearchRequest(searchValue);
             history.push({
-                pathname: '/popular',
+                pathname: '/',
                 search: '?search=' + searchValue
             })
         }
@@ -56,15 +63,14 @@ const Navigation = () => {
                             </NavDropdown>
                         </Nav>
                         <Form className="d-flex" onSubmit={e => e.preventDefault()}>
-                            <FormControl
-                                type="search"
-                                value={searchValue}
-                                placeholder="Search"
-                                className="me-2 search-box"
-                                onChange={handleChange}
-                                onKeyPress={handleKeyPress}
-                                aria-label="Search"
+
+                            <AutoSuggest
+                                searchValue={searchValue}
+                                handleChange={handleChange}
+                                handleKeyPress={handleKeyPress}
+                                setSearchValue={setSearchValue}
                             />
+
                             <ThemeButton
                                 onClick={onSearchClick}
                                 text="Search"

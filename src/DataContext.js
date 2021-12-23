@@ -13,6 +13,7 @@ export const DataProvider = ({ children }) => {
     const [message, setMessage] = useState();
     const [movies, setMovies] = useState([]);
     const [searchValue, setSearchValue] = useState();
+    const [autoSuggestResults, setAutoSuggestResult] = useState([]);
 
     const getSearchRequest = (searchValue) => {
         setSearchValue(searchValue)
@@ -30,6 +31,16 @@ export const DataProvider = ({ children }) => {
         }
     }
 
+    const searchDebounce = (searchValue) => {
+        if (searchValue) {
+            fetch(base_url + `search/movie?api_key=` + process.env.REACT_APP_API_KEY + `&language=en-US&query=${searchValue}&page=1&include_adult=false`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setAutoSuggestResult(data.results);
+                });
+        }
+    }
+
     const loadData = (pathName, history) => {
         fetch(base_url + "movie/" + pathName + "?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US&page=1")
             .then((res) => res.json())
@@ -40,7 +51,7 @@ export const DataProvider = ({ children }) => {
             });
     }
 
-    const value = { loadData, getSearchRequest, setMessage, message, movies, searchValue, setSearchValue };
+    const value = { loadData, getSearchRequest, setMessage, message, movies, searchValue, setSearchValue, searchDebounce, autoSuggestResults};
 
     return (
         <DataContext.Provider value={value}>

@@ -13,9 +13,8 @@ const SimilarMovies = ({ similarMovies, show, showMoreMovies }) => {
                 <Row>
                     {similarMovies &&
                         similarMovies.slice(0, show).map((movie) => (
-                            <Col xs={8} sm={6} md={4} lg={3}>
-                                <Movie key={movie.id} {...movie}
-                                />
+                            <Col key={movie.id} xs={12} sm={12} md={4} lg={3}>
+                                <Movie {...movie} />
                             </Col>
                         ))}
                 </Row>

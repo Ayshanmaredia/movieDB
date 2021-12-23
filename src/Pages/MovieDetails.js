@@ -79,8 +79,6 @@ const MovieDetails = () => {
       });
   }
 
-  console.log(credits)
-
   const setTrailerData = (data) => {
 
     if (data.results.length === 0) {
@@ -113,11 +111,8 @@ const MovieDetails = () => {
                 <Row>
                   {credits &&
                     credits.slice(0, visible).map((credit) => (
-                      <Col xs={4} md={2}>
-                        <Cast
-                          key={credit.id}
-                          {...credit}
-                        />
+                      <Col key={credit.id} xs={6} sm={4} md={2}>
+                        <Cast {...credit} />
                       </Col>
                     ))}
                 </Row>

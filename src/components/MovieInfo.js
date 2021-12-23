@@ -9,7 +9,7 @@ const MovieInfo = ({ img_url, selectedMovie, selectedTrailer, modalShow, setModa
     return (
         <Container className="my-5">
             <Row className="mt-4">
-                <Col sm={8} md={5} lg={3}>
+                <Col xs={12} sm={12} md={5} lg={3} className="text-center">
                     {selectedMovie.poster_path ?
                         <Image className="cover-image" src={img_url + selectedMovie.poster_path} />
                         :
@@ -21,10 +21,10 @@ const MovieInfo = ({ img_url, selectedMovie, selectedTrailer, modalShow, setModa
                     }
 
                 </Col>
-                <Col sm={8} md={7} lg={9} >
+                <Col xs={12} sm={12} md={7} lg={9}>
                     <h2 className="movieName">Movie: {selectedMovie.title}</h2>
                     <div>
-                        {selectedMovie.genres.map((g) => <div className="genrePill primary-color"> {g.name} </div>)}
+                        {selectedMovie.genres.map((g, index) => <div key={index} className="genrePill primary-color"> {g.name} </div>)}
                     </div>
                     <p className="movieInfo">Overview: <span>{selectedMovie.overview}</span></p>
                     <p className="movieInfo">Release Date: <span>{selectedMovie.release_date}</span></p>
