@@ -46,7 +46,7 @@ const Navigation = () => {
 
     return (
         <>
-            <Navbar className="navbar-main fixed-top" expand="lg">
+            <Navbar variant="dark" className="navbar-main fixed-top" expand="lg">
                 <Container>
                     <Navbar.Brand className="primary-color" role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
