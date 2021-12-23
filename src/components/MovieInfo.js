@@ -11,7 +11,7 @@ const MovieInfo = ({ img_url, selectedMovie, selectedTrailer, modalShow, setModa
             <Row className="mt-4">
                 <Col xs={12} sm={12} md={5} lg={3} className="text-center">
                     {selectedMovie.poster_path ?
-                        <Image className="cover-image" src={img_url + selectedMovie.poster_path} />
+                        <Image className="detail-cover-image" src={img_url + selectedMovie.poster_path} />
                         :
                         <div className="moviePosterParent">
                             <div className="moviePoster">

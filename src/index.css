@@ -41,6 +41,10 @@ hr {
   margin-bottom: 30px ;
 }
 
+.detail-cover-image {
+  width: 100%;
+}
+
 /* -------------------- Navigation component -------------------- */
 
 .navbar-main {
