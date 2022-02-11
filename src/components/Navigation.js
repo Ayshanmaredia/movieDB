@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Navbar, Container, Nav, NavDropdown, Form } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown, Form, Row, Col, Dropdown } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
 import { useData } from "../DataContext";
@@ -45,43 +45,41 @@ const Navigation = () => {
     };
 
     return (
-        <>
-            <Navbar variant="dark" className="navbar-main fixed-top" expand="lg">
-                <Container>
-                    <Navbar.Brand className="primary-color" role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <NavDropdown title="Categories" id="navbarScrollingDropdown" value="popular">
-                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("popular")}>Popular Movies</NavDropdown.Item>
-                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("top_rated")}>Top Rated Movies</NavDropdown.Item>
-                                <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                        <Form className="d-flex" onSubmit={e => e.preventDefault()}>
+        <Container fluid className="navbar-main py-2 px-5">
+            <Row className="align-items-center">
+                <Col md={6} className="my-1">
+                    <div className="primary-color d-inline-block navbar-brand" role="button" onClick={() => onDropdownItemClick("popular")}>MovieDB</div>
+                    <Nav
+                        className="d-inline-block navbar-wrapper"
+                        navbarScroll
+                    >
+                        <NavDropdown title="Categories" id="navbarScrollingDropdown" value="popular">
+                            <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("popular")}>Popular Movies</NavDropdown.Item>
+                            <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("top_rated")}>Top Rated Movies</NavDropdown.Item>
+                            <NavDropdown.Item className="secondary-color" onClick={() => onDropdownItemClick("upcoming")}>Upcoming Movies</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                </Col>
+                <Col md={6} className="my-1">
+                    <div className="d-flex search-container" onSubmit={e => e.preventDefault()}>
 
-                            <AutoSuggest
-                                searchValue={searchValue}
-                                handleChange={handleChange}
-                                handleKeyPress={handleKeyPress}
-                                setSearchValue={setSearchValue}
-                            />
-
+                        <AutoSuggest
+                            searchValue={searchValue}
+                            handleChange={handleChange}
+                            handleKeyPress={handleKeyPress}
+                            setSearchValue={setSearchValue}
+                        />
+                        <span className="search-btn">
                             <ThemeButton
                                 onClick={onSearchClick}
                                 text="Search"
                                 iconType="search"
                             />
-                        </Form>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </>
-
+                        </span>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

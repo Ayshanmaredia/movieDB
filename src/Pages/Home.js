@@ -47,7 +47,7 @@ const Home = () => {
           <Row>
             {movies && movies.length &&
               movies.map((movie) => (
-                <Col className="text-center" key={movie.id} xs={12} sm={12} md={6} lg={4} xl={3}>
+                <Col className="text-center" key={movie.id} sm={12} md={6} lg={4} xl={3} xs={12}>
                   <Movie {...movie} />
                 </Col>
               ))}

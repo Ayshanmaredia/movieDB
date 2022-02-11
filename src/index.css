@@ -16,7 +16,7 @@ code {
 /* -------------------- Common class -------------------- */
 
 hr {
-  border-bottom: 1px solid #8197a4 ;
+  border-bottom: 1px solid #8197a4;
 }
 
 .primary-color {
@@ -38,7 +38,7 @@ hr {
 
 .movie-details-page-body {
   margin-top: 90px;
-  margin-bottom: 30px ;
+  margin-bottom: 30px;
 }
 
 .detail-cover-image {
@@ -51,10 +51,36 @@ hr {
   background-color: #1a242f;
 }
 
+.select-category {
+  border: none;
+  color: #d4d7da;
+  font-weight: 500;
+  outline: none;
+  background: transparent;
+  padding: 0.375rem 0.75rem;
+}
+
+.option-category {
+  color: #8197a4;
+  background-color: #1a242f;
+}
+
+.option-category:hover {
+  background-color: #566b84 !important;
+}
+
 .nav-link-wrapper {
   display: inline-flex;
   width: 100%;
   justify-content: center;
+}
+
+.search-container {
+  justify-content: end;
+}
+
+.search-btn {
+  display: inline;
 }
 
 /* -------------------- Movie component -------------------- */
@@ -70,8 +96,8 @@ hr {
 }
 
 .card-main:hover {
-    border: 1.5px solid #1399de;
-    border-radius: 0;
+  border: 1.5px solid #1399de;
+  border-radius: 0;
 }
 
 .card-body-wrapper {
@@ -214,7 +240,7 @@ hr {
   margin-right: 7px;
 }
 
-.button-disable { 
+.button-disable {
   background-color: gray !important;
   border: none;
   height: 40px;
@@ -294,4 +320,38 @@ hr {
   color: #fff !important;
   opacity: 1;
   font-weight: 500;
+}
+
+.navbar-brand {
+  padding: 0;
+  margin-top: 5px;
+  margin-right: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  /* ------------------- Movie Details Page ------------------ */
+
+  .detail-cover-image {
+    width: 60%;
+    margin-bottom: 10px;
+  }
+
+  /* -------------------- Navigation component -------------------- */
+
+  .search-container {
+    display: block !important;
+    width: 100%;
+  }
+
+  .search-btn {
+    display: none;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .navbar-wrapper {
+    float: right;
+  }
 }
