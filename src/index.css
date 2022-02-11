@@ -49,6 +49,9 @@ hr {
 
 .navbar-main {
   background-color: #1a242f;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .select-category {
