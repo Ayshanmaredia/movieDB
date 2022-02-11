@@ -7,7 +7,7 @@ const SimilarMovies = ({ similarMovies, show, showMoreMovies }) => {
 
     return (
         <div>
-            <Container>
+            <Container className="mt-5">
                 <h3 className="text-white">Similar Movies</h3>
                 <hr></hr>
                 <Row>

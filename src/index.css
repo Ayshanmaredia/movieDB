@@ -332,7 +332,17 @@ hr {
 }
 
 @media only screen and (max-width: 500px) {
+  /* -------------------- Home Page -------------------- */
+
+  .home-page-body {
+    margin-top: 100px;
+  }
+
   /* ------------------- Movie Details Page ------------------ */
+
+  .movie-details-page-body {
+    margin-top: 130px;
+  }
 
   .detail-cover-image {
     width: 60%;
